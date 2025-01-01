@@ -1,6 +1,7 @@
 package com.example.computer_project;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
     private String Name;
@@ -25,17 +25,16 @@ public class HomeActivity extends AppCompatActivity {
 
     private Map<String, Integer> ageMap;
 
+    private TextView logoutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
-        Intent i = getIntent();
-
-        UserData userData = UserData.fromStringData(Objects.requireNonNull(i.getStringExtra("USER_DATA")));
-
-        this.Name = userData.Name;
-        this.Age = userData.Age;
+        UserData userData = loadUserData();
+        this.Name = userData.getName();
+        this.Age = userData.getAge();
 
         this.ageMap = Map.of(
                 "Instagram", 13,
@@ -108,7 +107,7 @@ public class HomeActivity extends AppCompatActivity {
             ((ImageView) findViewById(R.id.statusView5)).setImageResource(R.drawable.unlock);
 
             this.imageButton5.setOnClickListener(v -> {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.whatsapp.com/")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/")));
             });
         }
 
@@ -122,6 +121,28 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/direct/threads/")));
             });
         }
+
+        this.logoutButton = (TextView) findViewById(R.id.logoutView);
+
+        this.logoutButton.setOnClickListener(v -> {
+            clearUserData();
+            startActivity(new Intent(HomeActivity.this, MainActivity.class));
+        });
     }
 
+    private UserData loadUserData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String userDataJson = sharedPreferences.getString("USER_DATA", null);
+        if (userDataJson != null) {
+            return UserData.fromJson(userDataJson);
+        }
+        return null;
+    }
+
+    private void clearUserData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }

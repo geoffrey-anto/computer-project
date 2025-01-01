@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#00FFFFFF"
+    android:background="#00FFFFFF"
+    android:backgroundTint="#00D51616"
+    android:backgroundTintMode="src_atop"
     tools:context=".HomeActivity">
 
     <TextView
@@ -27,6 +29,9 @@
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:backgroundTintMode="add"
         android:scaleType="fitXY"
         android:translationZ="-3dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -126,6 +131,7 @@
         android:layout_height="20dp"
         android:background="#00FFFFFF"
 
+        android:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.437"
@@ -173,10 +179,10 @@
         android:id="@+id/statusView3"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.437"
-        android:background="#00FFFFFF"
 
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3"
@@ -222,12 +228,12 @@
         android:id="@+id/statusView4"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/view4"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="@+id/view4"
         app:layout_constraintTop_toTopOf="@+id/view4"
-        android:background="#00FFFFFF"
 
         app:layout_constraintVertical_bias="0.965"
         app:srcCompat="@android:drawable/ic_menu_help" />
@@ -273,11 +279,11 @@
         android:id="@+id/statusView5"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
         app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="@+id/view5"
-        android:background="#00FFFFFF"
         app:layout_constraintTop_toTopOf="@+id/view5"
         app:layout_constraintVertical_bias="0.965"
         app:srcCompat="@android:drawable/ic_menu_help" />
@@ -323,14 +329,31 @@
         android:id="@+id/statusView6"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/view6"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
         app:layout_constraintHorizontal_bias="0.437"
-        android:background="#00FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/view6"
         app:layout_constraintTop_toTopOf="@+id/view6"
         app:layout_constraintVertical_bias="0.965"
         app:srcCompat="@android:drawable/ic_menu_help" />
+
+    <TextView
+        android:id="@+id/logoutView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#FF0000"
+        android:text="Logout"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FF0000"
+        android:textColorHighlight="#FF0000"
+        android:textColorHint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.018" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

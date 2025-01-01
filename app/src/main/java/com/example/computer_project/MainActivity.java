@@ -2,6 +2,7 @@ package com.example.computer_project;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -63,31 +64,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void submit() {
         if(dobDate.getText().toString().split("/").length != 3) {
-            Toast toast = Toast.makeText(this, "Please enter correct DOB!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Please enter valid DOB (DD/MM/YYYY)!", Toast.LENGTH_LONG);
             toast.show();
             return;
         }
 
         if(nameText.getText().toString().length() < 3) {
-            Toast toast = Toast.makeText(this, "Please enter correct name!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Please enter valid name!", Toast.LENGTH_LONG);
             toast.show();
             return;
         }
 
         if(filePath == null || filePath.getPath() == null || filePath.getPath().length() == 0) {
-            Toast toast = Toast.makeText(this, "Please upload a file!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Please upload a ID!", Toast.LENGTH_LONG);
             toast.show();
             return;
         }
 
         UserData userData = new UserData(nameText.getText().toString(), dobDate.getText().toString(), filePath.getPath());
-        userData.print();
-
-        // Do Something
 
         // Go to home screen
+        saveUserData(userData);
+
         Intent i = new Intent(MainActivity.this, HomeActivity.class);
-        i.putExtra("USER_DATA", userData.toStringData());
         startActivity(i);
     }
 
@@ -163,5 +162,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == buttonUpload) {
             submit();
         }
+    }
+
+    private void saveUserData(UserData userData) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("USER_DATA", userData.toJson());
+        editor.apply();
     }
 }
